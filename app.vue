@@ -11,7 +11,7 @@
             </div>
           </aside>
           <main class="col-span-12 md:col-span-8 xl:col-span-6">
-            main
+            <router-view />
           </main>
           <aside class="sm:block xl:col-span4 md:col-span-3">
             <div class="sticky top-0">
