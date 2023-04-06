@@ -10,7 +10,6 @@ export const createUser = (userData: UserData) => {
   return prisma.user.create({
     data: finalUserData
   });
-
 };
 
 export const getUserByUsername = (username: string) => {
