@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { User } from '~~/types/user';
 import { userTransformer } from '../transformers/user';
+import { RefreshToken } from '@prisma/client';
 
 const generateAccessToken = (user: User) => {
   const config = useRuntimeConfig();
@@ -35,4 +36,14 @@ export const sendRefreshToken = (event: any, token: string) => {
     httpOnly: true,
     sameSite: true
   });
+}
+
+export const decodeRefreshToken = (token: string) => {
+  const config = useRuntimeConfig();
+
+  try {
+    return jwt.verify(token, config.jwtRefreshSecret)
+  } catch (error) {
+    return null;
+  }
 }

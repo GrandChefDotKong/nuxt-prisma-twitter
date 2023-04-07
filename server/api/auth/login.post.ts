@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { generateTokens, sendRefreshToken } from "~~/server/utils/jwt";
 import { userTransformer } from "~~/server/transformers/user";
 import { createRefreshToken } from "~~/server/db/refreshToken";
+import { sendError } from 'h3';
 
 export default defineEventHandler(async(event) => {
   const body = await readBody(event);
