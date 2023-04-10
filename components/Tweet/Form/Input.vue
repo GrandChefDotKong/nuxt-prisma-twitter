@@ -100,7 +100,7 @@
       </div>
       <div class="ml-auto">
         <UIButton size="sm" :disabled="isDisabled" @onClick="handleFormSubmit">
-          <span class="font-bold">Tweet</span>
+          <strong class="font-bold">Tweet</strong>
         </UIButton>
       </div>
     </div>
