@@ -1,7 +1,7 @@
 <template>
   <div>
     <MainSection title="Home" :loading="loading">
-      {{ user }}
+      <TweetForm :user="user" />
     </MainSection>
   </div>
 </template>

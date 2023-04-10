@@ -1,5 +1,7 @@
 import formidable from 'formidable';
+import { createMediaFile } from '~~/server/db/mediaFiles';
 import { createTweet } from '~~/server/db/tweets';
+import { uploadToCloudinary } from '~~/server/utils/cloudinary';
 import { TweetData } from '~~/types/tweet';
 
 export default defineEventHandler(async(event) => {
@@ -23,8 +25,24 @@ export default defineEventHandler(async(event) => {
     text: fields.text,
     authorId: userId
   } as TweetData;
-
+  
   const tweet = await createTweet(tweetData);
+
+  const filePromises = Object.keys(files).map(async(key) => {
+
+    const file = files[key];
+    const cloudinaryRessource = await uploadToCloudinary(file.filepath);
+
+    return createMediaFile({
+      url: cloudinaryRessource.secure_url,
+      providerPublicId: cloudinaryRessource.public_id,
+      userId: userId,
+      tweetId: tweet.id
+    })
+  });
+
+  await Promise.all(filePromises);
+  
 
   return {
     hello: 'world'
