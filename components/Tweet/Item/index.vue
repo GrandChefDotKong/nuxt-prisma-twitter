@@ -1,9 +1,9 @@
 <template>
   <div>
     <TweetItemHeader :tweet="props.tweet" />
-    <div class="ml-16">
+    <div :class="tweetBodyWrapper">
       <p class="flex-shrink w-auto font-medium text-gray-800
-      dark:text-white">
+      dark:text-white" :class="textSize">
         {{ props.tweet.text }}
       </p>
       <div v-for="image in tweet.mediaFiles" 
@@ -13,10 +13,9 @@
         <img :src="image.url" alt="tweet image" class="w-full rounded-xl">
       </div>
       <div class="mt-2">
-        <TweetItemActions :tweet="props.tweet" />
+        <TweetItemActions :tweet="props.tweet" :compact="props.compact" />
       </div>
     </div>
-
   </div>
 </template>
 
@@ -26,8 +25,22 @@
     tweet: {
       type: Object,
       required: true
+    },
+    compact: {
+      type: Boolean,
+      default: false
     }
   });
 
+  const tweetBodyWrapper = computed(() => 
+    props.compact ? 'ml-16': 'ml-2 mt-4'
+  );
+
+  const textSize = computed(() => 
+    props.compact ? 'text-base' : 'text-2xl'
+  );
+
 </script>
+
+
 

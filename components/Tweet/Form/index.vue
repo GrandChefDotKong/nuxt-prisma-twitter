@@ -9,7 +9,7 @@
     <div v-else>
       <TweetFormInput
         :user="props.user"
-        placeholder="What's happenig"
+        placeholder="What's happening"
         @onSubmit="handleFormSubmit"
       />
     </div>
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
   const loading = ref(false);
-
+  const emits = defineEmits(['onSuccess']);
   const { postTweet } = useTweet();
 
   const props = defineProps({
@@ -31,8 +31,12 @@
   async function handleFormSubmit(data) {
     loading.value = true
     try {
-      const response = await postTweet(data);
-      console.log(response); 
+      const response = await postTweet({
+        text: data.text,
+        mediaFiles: data.mediaFiles,
+        replyTo: props.replyTo?.id
+      });
+      emits('onSuccess', response.tweet);
     } catch (error) {
       console.log(error); 
     } finally {

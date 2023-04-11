@@ -1,7 +1,8 @@
 export default () => {
-  const postTweet = (formData) => {
+  const postTweet = (formData: any) => {
     const form = new FormData();
     form.append('text', formData.text);
+    form.append('replyTo', formData.replyTo)
 
     formData.mediaFiles.forEach((mediaFile, index) => {
       form.append(`media_file_${index}`, mediaFile);
@@ -26,5 +27,16 @@ export default () => {
     })
   }
 
-  return { postTweet, getHomeTweets }
+  const getTweetById = (tweetId: string) => {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await useFetchApi(`/api/tweets/${tweetId}`);
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    })
+  }
+
+  return { postTweet, getHomeTweets, getTweetById }
 }

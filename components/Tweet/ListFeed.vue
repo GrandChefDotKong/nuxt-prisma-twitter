@@ -9,8 +9,9 @@
         class="pb-4 border-b hoover:bg-gray-100 cursor-pointer 
         dark:hover:bg-dim-300" 
         :class="[twitterBorderColor, defaultTransition]"
+        @click.native="redirect(tweet)"
       >
-        <TweetItem :tweet="tweet" />
+        <TweetItem :tweet="tweet" compact />
       </li>
     </ul>
   </div>
@@ -25,6 +26,10 @@
       required: true
     }
   });
+
+  function redirect(tweet) {
+    navigateTo(`/status/${tweet.id}`)
+  }
 
   const noTweets = computed(() => props.tweets.length === 0);
 </script>
