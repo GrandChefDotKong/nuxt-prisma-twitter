@@ -1,5 +1,7 @@
-import { mediaFilesTransformer } from "./mediaFiles"
-import { userTransformer } from "./user"
+import { mediaFilesTransformer } from './mediaFiles';
+import { userTransformer } from './user';
+import human from 'human-time';
+
 
 export const tweetTransformer = (tweet) => {
   return {
@@ -13,5 +15,8 @@ export const tweetTransformer = (tweet) => {
       tweet.replies.map(tweetTransformer) : [],
     replyTo: tweet.replyTo ? 
       tweetTransformer(tweet.replyTo) : null,
-  }
+    replyCount: 
+      tweet.replies ? tweetTransformer.replies.lenght: 0,
+    postedAtHuman: human(tweet.createdAt)
+  };
 }

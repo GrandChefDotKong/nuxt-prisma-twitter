@@ -17,7 +17,10 @@ export default defineEventHandler(async(event) => {
           author: true
         }
       }
-    }
+    },
+    orderBy: [
+      { createdAt: 'desc' }
+    ]
   });
 
   return {

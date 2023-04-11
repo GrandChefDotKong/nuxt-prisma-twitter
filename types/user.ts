@@ -3,7 +3,8 @@ export type User = {
     name: string | null,
     email: string,
     username: string,
-    profileImage: string | null
+    profileImage: string | null,
+    handle?: string;
 };
 
 export type UserData = {
