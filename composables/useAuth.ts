@@ -70,6 +70,7 @@ export default () => {
             password
           }
         });
+        
         setToken(data.access_token);
         setUser(data.user);
         resolve(true);
@@ -84,12 +85,10 @@ export default () => {
       useAuthLoading().value = true;
       try {
         await refreshToken();
-        await getUser;
+        await getUser();
 
         refreshAccessToken();
-
         resolve(true);
-
       } catch (error) {
         reject(error) 
       } finally {

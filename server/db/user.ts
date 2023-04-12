@@ -7,6 +7,7 @@ export const createUser = (userData: UserData) => {
     ...userData,
     password: bcrypt.hashSync(userData.password, 10) as string
   }
+
   return prisma.user.create({
     data: finalUserData
   });

@@ -4,19 +4,21 @@ import { getUserById } from '../db/user';
 
 export default defineEventHandler(async(event) => {
   const endpoints = [
-    'api/auth/user', 
-    'api/user/tweets', 
-    'api/tweets', 
-    'api/tweets/:id'
+    '/api/auth/user', 
+    '/api/user/tweets', 
+    '/api/tweets', 
+    '/api/tweets/:id'
   ];
 
   const isHandledByThisMiddleware = endpoints.some(endpoint => {
     const pattern = new UrlPattern(endpoint);
 
-    return pattern.match(event.node.req.url || "error");
+    return pattern.match(event.node.req.url);
   });
 
-  if(!isHandledByThisMiddleware) return;
+  if(!isHandledByThisMiddleware) {
+    return;
+  }
 
   const token = 
     event.node.req.headers['authorization']?.split(' ')[1];

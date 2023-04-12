@@ -31,7 +31,7 @@ export default defineEventHandler(async(event) => {
   } 
 
   try {
-    const user = getUserById(decodedRefreshToken.userId);
+    const user = await getUserById(decodedRefreshToken.userId);
     if(!user) {
       return sendError(event, createError({
         statusCode: 401,

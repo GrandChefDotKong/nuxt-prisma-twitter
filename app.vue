@@ -34,5 +34,8 @@
   const isAuthLoading = useAuthLoading();
   const user = useAuthUser();
 
-  onBeforeMount(() => initAuth());
+  onBeforeMount(() => {
+    console.log('/////onBeforeMount()//////')
+    initAuth()
+  });
 </script>

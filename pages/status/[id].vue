@@ -4,7 +4,7 @@
       <Head>
         <Title>Home / Twitter</Title>
       </Head>
-      <TweetDetails :user="" :tweet="tweet" />
+      <TweetDetails :user="user" :tweet="tweet" />
     </MainSection>
   </div>
 </template>
